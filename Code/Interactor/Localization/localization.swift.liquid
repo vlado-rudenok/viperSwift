@@ -1,0 +1,29 @@
+//
+//  {{ module_info.file_name }}
+//  {{ module_info.project_name }}
+//
+//  Created by {{ developer.name }} on {{ date }}.
+//  Copyright © {{ year }} {{ developer.company }}. All rights reserved.
+//
+
+import Foundation
+
+enum {{ module_info.name }}String: String {
+    
+    case screenTitle = "screen.title"
+}
+
+extension {{ module_info.name }}String {
+
+    ///Localized corresponding value of the raw type
+    var localizedValue: String {
+        return NSLocalizedString(rawValue, tableName: "{{ module_info.name }}", comment: rawValue)
+    }
+
+    ///Localized corresponding value of the raw type using arguments
+    func localizedValue(with arguments: CVarArg...) -> String {
+        return withVaList(arguments) { (pointer: CVaListPointer) -> String in
+            return NSString(format: localizedValue, arguments: pointer) as String
+        }
+    }
+}
